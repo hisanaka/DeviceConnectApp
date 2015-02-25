@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DeviceConnectParam>
+    <Profile name="vibration">
+        <Attribute>
+            <Name>Start</Name>
+            <Method>PUT</Method>
+            <Path>vibrate</Path>
+            <Option>
+                <Name>pattern</Name>
+                <Type>select</Type>
+                <Value>1</Value>
+                <Value>2</Value>
+            </Option>
+            <Option>
+                <Name>led_on</Name>
+                <Type>select</Type>
+                <Value>0</Value>
+                <Value>1</Value>
+            </Option>
+        </Attribute>
+    </Profile>
+    <Profile name="light">
+        <Attribute>
+            <Name>LED Blink</Name>
+            <Method>PUT</Method>
+            <Path>light</Path>
+            <Option>
+                <Name>pattern</Name>
+                <Type>select</Type>
+                <Value>1</Value>
+                <Value>2</Value>
+            </Option>
+            <Option>
+                <Name>vibration_on</Name>
+                <Type>select</Type>
+                <Value>0</Value>
+                <Value>1</Value>
+            </Option>
+        </Attribute>
+    </Profile>
+    <Profile name="gesture">
+        <Attribute>
+            <Name>Register Gesture Event</Name>
+            <Method>EVENT</Method>
+            <Path>on</Path>
+        </Attribute>
+        <Attribute>
+            <Name>Unregister Gesture Event</Name>
+            <Method>EVENT</Method>
+            <Path>off</Path>
+        </Attribute>
+    </Profile>
+    <Profile name="information">
+        <Attribute>
+            <Name>Manufacture Name</Name>
+            <Method>GET</Method>
+            <Path>manufacture_name</Path>
+        </Attribute>
+        <Attribute>
+            <Name>Model Number</Name>
+            <Method>GET</Method>
+            <Path>model_number</Path>
+        </Attribute>
+        <Attribute>
+            <Name>Serial Number</Name>
+            <Method>GET</Method>
+            <Path>serial_number</Path>
+        </Attribute>
+        <Attribute>
+            <Name>Hardware Revision</Name>
+            <Method>GET</Method>
+            <Path>hardware_revision</Path>
+        </Attribute>
+        <Attribute>
+            <Name>Firmware Revision</Name>
+            <Method>GET</Method>
+            <Path>firmware_revision</Path>
+        </Attribute>
+        <Attribute>
+            <Name>Software Revision</Name>
+            <Method>GET</Method>
+            <Path>software_revision</Path>
+        </Attribute>
+    </Profile>
+    <Profile name="system">
+        <Attribute>
+            <Name>System information</Name>
+            <Method>GET</Method>
+            <Path/>
+        </Attribute>
+        <Attribute>
+            <Name>Device information</Name>
+            <Method>GET</Method>
+            <Path>device</Path>
+        </Attribute>
+    </Profile>
+</DeviceConnectParam>

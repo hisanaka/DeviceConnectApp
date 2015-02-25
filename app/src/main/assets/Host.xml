@@ -1,0 +1,757 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DeviceConnectParam>
+    <Profile name="battery">
+        <Attribute>
+            <Name>Charging Status</Name>
+            <Path>charging</Path>
+            <Method>GET</Method>
+        </Attribute>
+        <Attribute>
+            <Name>Charging Time</Name>
+            <Path>chargingTime</Path>
+            <Method>GET</Method>
+        </Attribute>
+        <Attribute>
+            <Name>Discharging Time</Name>
+            <Path>dischargingTime</Path>
+            <Method>GET</Method>
+        </Attribute>
+        <Attribute>
+            <Name>Status Level</Name>
+            <Path>level</Path>
+            <Method>GET</Method>
+        </Attribute>
+        <Attribute>
+            <Name>On Charging Change</Name>
+            <Path>onchargingchange</Path>
+            <Method>EVENT</Method>
+        </Attribute>
+        <Attribute>
+            <Name>On Battery Change</Name>
+            <Path>onbatterychange</Path>
+            <Method>EVENT</Method>
+        </Attribute>
+    </Profile>
+    <Profile name="connect">
+        <Attribute>
+            <Name>WiFi connect state</Name>
+            <Path>wifi</Path>
+            <Method>GET</Method>
+        </Attribute>
+        <Attribute>
+            <Name>WiFi On</Name>
+            <Path>wifi</Path>
+            <Method>PUT</Method>
+        </Attribute>
+        <Attribute>
+            <Name>WiFi Off</Name>
+            <Path>wifi</Path>
+            <Method>DELETE</Method>
+        </Attribute>
+        <Attribute>
+            <Name>WiFi Change</Name>
+            <Path>onwifichange</Path>
+            <Method>EVENT</Method>
+        </Attribute>
+        <Attribute>
+            <Name>Bluetooth connect state</Name>
+            <Path>bluetooth</Path>
+            <Method>GET</Method>
+        </Attribute>
+        <Attribute>
+            <Name>Bluetooth On</Name>
+            <Path>bluetooth</Path>
+            <Method>PUT</Method>
+        </Attribute>
+        <Attribute>
+            <Name>Bluetooth Off</Name>
+            <Path>bluetooth</Path>
+            <Method>DELETE</Method>
+        </Attribute>
+        <Attribute>
+            <Name>Bluetooth State Change</Name>
+            <Path>onbluetoothchange</Path>
+            <Method>EVENT</Method>
+        </Attribute>
+        <Attribute>
+            <Name>Bluetooth discoverable On</Name>
+            <Path>bluetooth/discoverable</Path>
+            <Method>PUT</Method>
+        </Attribute>
+        <Attribute>
+            <Name>Bluetooth discoverable Off</Name>
+            <Path>bluetooth/discoverable</Path>
+            <Method>DELETE</Method>
+        </Attribute>
+        <Attribute>
+            <Name>NFC connect state</Name>
+            <Path>nfc</Path>
+            <Method>GET</Method>
+        </Attribute>
+        <Attribute>
+            <Name>NFC connect On</Name>
+            <Path>nfc</Path>
+            <Method>PUT</Method>
+        </Attribute>
+        <Attribute>
+            <Name>NFC connect Off</Name>
+            <Path>nfc</Path>
+            <Method>DELETE</Method>
+        </Attribute>
+        <Attribute>
+            <Name>NFC Connect Change</Name>
+            <Path>onnfcchange</Path>
+            <Method>EVENT</Method>
+        </Attribute>
+        <Attribute>
+            <Name>BLE connect state</Name>
+            <Path>ble</Path>
+            <Method>GET</Method>
+        </Attribute>
+        <Attribute>
+            <Name>BLE connect On</Name>
+            <Path>ble</Path>
+            <Method>PUT</Method>
+        </Attribute>
+        <Attribute>
+            <Name>BLEconnect Off</Name>
+            <Path>ble</Path>
+            <Method>DELETE</Method>
+        </Attribute>
+        <Attribute>
+            <Name>BLE Connect Change</Name>
+            <Path>onblechange</Path>
+            <Method>EVENT</Method>
+        </Attribute>
+    </Profile>
+    <Profile name="file_descriptor">
+        <Attribute>
+            <Name>File open</Name>
+            <Path>open</Path>
+            <Method>GET</Method>
+            <Option>
+                <Name>path</Name>
+                <Type>file</Type>
+            </Option>
+            <Option>
+                <Name>flag</Name>
+                <Type>select</Type>
+                <Value>r</Value>
+                <Value>rw</Value>
+            </Option>
+        </Attribute>
+        <Attribute>
+            <Name>File Close</Name>
+            <Path>close</Path>
+            <Method>PUT</Method>
+            <Option>
+                <Name>path</Name>
+                <Type>file</Type>
+            </Option>
+        </Attribute>
+        <Attribute>
+            <Name>File Read</Name>
+            <Path>read</Path>
+            <Method>GET</Method>
+            <Option>
+                <Name>path</Name>
+                <Type>file</Type>
+            </Option>
+            <Option>
+                <Name>length</Name>
+                <Type>text</Type>
+            </Option>
+            <Option>
+                <Name>position</Name>
+                <Type>text</Type>
+            </Option>
+        </Attribute>
+        <Attribute>
+            <Name>File write</Name>
+            <Path>write</Path>
+            <Method>PUT</Method>
+            <Option>
+                <Name>path</Name>
+                <Type>file</Type>
+            </Option>
+            <Option>
+                <Name>position</Name>
+                <Type>text</Type>
+            </Option>
+            <Option>
+                <Name>media</Name>
+                <Type>text</Type>
+            </Option>
+        </Attribute>
+        <Attribute>
+            <Name>Watch File</Name>
+            <Path>onwatchfile</Path>
+            <Method>EVENT</Method>
+        </Attribute>
+    </Profile>
+    <Profile name="file">
+        <Attribute>
+            <Name>File Send</Name>
+            <Path>send</Path>
+            <Method>POST</Method>
+            <Option>
+                <Name>path</Name>
+                <Type>file</Type>
+            </Option>
+            <Option>
+                <Name>mimeType</Name>
+                <Type>text</Type>
+            </Option>
+            <Option>
+                <Name>data</Name>
+                <Type>text</Type>
+            </Option>
+        </Attribute>
+        <Attribute>
+            <Name>File receive</Name>
+            <Path>receive</Path>
+            <Method>GET</Method>
+            <Option>
+                <Name>path</Name>
+                <Type>file</Type>
+            </Option>
+        </Attribute>
+        <Attribute>
+            <Name>File list</Name>
+            <Path>list</Path>
+            <Method>GET</Method>
+            <Option>
+                <Name>path</Name>
+                <Type>file</Type>
+            </Option>
+            <Option>
+                <Name>mimeType</Name>
+                <Type>text</Type>
+            </Option>
+            <Option>
+                <Name>order</Name>
+                <Type>text</Type>
+            </Option>
+            <Option>
+                <Name>offset</Name>
+                <Type>text</Type>
+            </Option>
+            <Option>
+                <Name>limit</Name>
+                <Type>text</Type>
+            </Option>
+        </Attribute>
+        <Attribute>
+            <Name>File Remove</Name>
+            <Path>remove</Path>
+            <Method>DELETE</Method>
+            <Option>
+                <Name>path</Name>
+                <Type>file</Type>
+            </Option>
+        </Attribute>
+        <Attribute>
+            <Name>Make directory</Name>
+            <Path>mkdir</Path>
+            <Method>POST</Method>
+            <Option>
+                <Name>path</Name>
+                <Type>file</Type>
+            </Option>
+        </Attribute>
+        <Attribute>
+            <Name>Remove Directory</Name>
+            <Path>rmdir</Path>
+            <Method>DELETE</Method>
+            <Option>
+                <Name>path</Name>
+                <Type>file</Type>
+            </Option>
+            <Option>
+                <Name>force</Name>
+                <Type>select</Type>
+                <Value>true</Value>
+                <Value>false</Value>
+            </Option>
+        </Attribute>
+    </Profile>
+    <Profile name="media_player">
+        <Attribute>
+            <Name>Media select</Name>
+            <Path>media</Path>
+            <Method>PUT</Method>
+            <Option>
+                <Name>mediaId</Name>
+                <Type>text</Type>
+            </Option>
+        </Attribute>
+        <Attribute>
+            <Name>Get Media Info</Name>
+            <Path>media</Path>
+            <Method>GET</Method>
+            <Option>
+                <Name>mediaId</Name>
+                <Type>text</Type>
+            </Option>
+        </Attribute>
+        <Attribute>
+            <Name>Media List</Name>
+            <Path>media_list</Path>
+            <Method>GET</Method>
+            <Option>
+                <Name>query</Name>
+                <Type>text</Type>
+            </Option>
+            <Option>
+                <Name>mimeType</Name>
+                <Type>text</Type>
+            </Option>
+            <Option>
+                <Name>order</Name>
+                <Type>text</Type>
+            </Option>
+            <Option>
+                <Name>offset</Name>
+                <Type>text</Type>
+            </Option>
+            <Option>
+                <Name>limit</Name>
+                <Type>text</Type>
+            </Option>
+        </Attribute>
+        <Attribute>
+            <Name>Play status</Name>
+            <Path>play_status</Path>
+            <Method>GET</Method>
+        </Attribute>
+        <Attribute>
+            <Name>Change play status</Name>
+            <Path>play</Path>
+            <Method>PUT</Method>
+        </Attribute>
+        <Attribute>
+            <Name>Play Stop</Name>
+            <Path>stop</Path>
+            <Method>PUT</Method>
+        </Attribute>
+        <Attribute>
+            <Name>Pause play</Name>
+            <Path>pause</Path>
+            <Method>PUT</Method>
+        </Attribute>
+        <Attribute>
+            <Name>Resume play</Name>
+            <Path>resume</Path>
+            <Method>PUT</Method>
+        </Attribute>
+        <Attribute>
+            <Name>Put Seek</Name>
+            <Path>seek</Path>
+            <Method>PUT</Method>
+            <Option>
+                <Name>pos</Name>
+                <Type>text</Type>
+            </Option>
+        </Attribute>
+        <Attribute>
+            <Name>Get Seek</Name>
+            <Path>seek</Path>
+            <Method>GET</Method>
+        </Attribute>
+        <Attribute>
+            <Name>Change Volume</Name>
+            <Path>volume</Path>
+            <Method>PUT</Method>
+            <Option>
+                <Name>volume</Name>
+                <Type>text</Type>
+            </Option>
+        </Attribute>
+        <Attribute>
+            <Name>Get Volume</Name>
+            <Path>volume</Path>
+            <Method>GET</Method>
+        </Attribute>
+        <Attribute>
+            <Name>Mute</Name>
+            <Path>mute</Path>
+            <Method>PUT</Method>
+        </Attribute>
+        <Attribute>
+            <Name>Un-Mute </Name>
+            <Path>mute</Path>
+            <Method>DELETE</Method>
+        </Attribute>
+        <Attribute>
+            <Name>Get mute state</Name>
+            <Path>mute</Path>
+            <Method>GET</Method>
+        </Attribute>
+        <Attribute>
+            <Name>On Status Change</Name>
+            <Path>onstatuschange</Path>
+            <Method>EVENT</Method>
+        </Attribute>
+    </Profile>
+    <Profile name="mediastream_recording">
+        <Attribute>
+            <Name>Get Available cameras</Name>
+            <Path>mediarecorder</Path>
+            <Method>GET</Method>
+        </Attribute>
+        <Attribute>
+            <Name>Take Photo</Name>
+            <Path>takephoto</Path>
+            <Method>POST</Method>
+            <Option>
+                <Name>target</Name>
+                <Type>text</Type>
+            </Option>
+        </Attribute>
+        <Attribute>
+            <Name>Start recording</Name>
+            <Path>record</Path>
+            <Method>POST</Method>
+            <Option>
+                <Name>target</Name>
+                <Type>text</Type>
+            </Option>
+            <Option>
+                <Name>timeslice</Name>
+                <Type>text</Type>
+            </Option>
+        </Attribute>
+        <Attribute>
+            <Name>Pause recording</Name>
+            <Path>pause</Path>
+            <Method>PUT</Method>
+            <Option>
+                <Name>target</Name>
+                <Type>text</Type>
+            </Option>
+        </Attribute>
+        <Attribute>
+            <Name>Resume recording</Name>
+            <Path>resume</Path>
+            <Method>PUT</Method>
+            <Option>
+                <Name>target</Name>
+                <Type>text</Type>
+            </Option>
+        </Attribute>
+        <Attribute>
+            <Name>Stop recording</Name>
+            <Path>stop</Path>
+            <Method>PUT</Method>
+            <Option>
+                <Name>target</Name>
+                <Type>text</Type>
+            </Option>
+        </Attribute>
+        <Attribute>
+            <Name>Mute track</Name>
+            <Path>mutetrack</Path>
+            <Method>PUT</Method>
+            <Option>
+                <Name>target</Name>
+                <Type>text</Type>
+            </Option>
+        </Attribute>
+        <Attribute>
+            <Name>Un-mute track</Name>
+            <Path>unmutetrack</Path>
+            <Method>PUT</Method>
+            <Option>
+                <Name>target</Name>
+                <Type>text</Type>
+            </Option>
+        </Attribute>
+        <Attribute>
+            <Name>Get options</Name>
+            <Path>options</Path>
+            <Method>GET</Method>
+            <Option>
+                <Name>target</Name>
+                <Type>text</Type>
+            </Option>
+        </Attribute>
+        <Attribute>
+            <Name>Put options</Name>
+            <Path>options</Path>
+            <Method>PUT</Method>
+            <Option>
+                <Name>target</Name>
+                <Type>text</Type>
+            </Option>
+            <Option>
+                <Name>imageWidth</Name>
+                <Type>text</Type>
+            </Option>
+            <Option>
+                <Name>imageHeight</Name>
+                <Type>text</Type>
+            </Option>
+            <Option>
+                <Name>mimeType</Name>
+                <Type>text</Type>
+            </Option>
+        </Attribute>
+        <Attribute>
+            <Name>On Photo</Name>
+            <Path>onphoto</Path>
+            <Method>EVENT</Method>
+        </Attribute>
+        <Attribute>
+            <Name>Data Available</Name>
+            <Path>ondataavailable</Path>
+            <Method>EVENT</Method>
+        </Attribute>
+        <Attribute>
+            <Name>On Status Change</Name>
+            <Path>onrecordingchange</Path>
+            <Method>EVENT</Method>
+        </Attribute>
+    </Profile>
+    <Profile name="notification">
+        <Attribute>
+            <Name>Post notification</Name>
+            <Path>notify</Path>
+            <Method>POST</Method>
+            <Option>
+                <Name>type</Name>
+                <Type>select</Type>
+                <Value>0</Value>
+                <Value>1</Value>
+                <Value>2</Value>
+                <Value>3</Value>
+            </Option>
+            <Option>
+                <Name>dir</Name>
+                <Type>select</Type>
+                <Value>auto</Value>
+                <Value>rtl</Value>
+                <Value>ltr</Value>
+            </Option>
+            <Option>
+                <Name>lang</Name>
+                <Type>text</Type>
+            </Option>
+            <Option>
+                <Name>body</Name>
+                <Type>text</Type>
+            </Option>
+            <Option>
+                <Name>tag</Name>
+                <Type>text</Type>
+            </Option>
+            <Option>
+                <Name>icon</Name>
+                <Type>text</Type>
+            </Option>
+        </Attribute>
+        <Attribute>
+            <Name>Delete Notification</Name>
+            <Path>notify</Path>
+            <Method>DELETE</Method>
+            <Option>
+                <Name>notificationId</Name>
+                <Type>text</Type>
+            </Option>
+        </Attribute>
+        <Attribute>
+            <Name>Notification Click</Name>
+            <Path>onclick</Path>
+            <Method>EVENT</Method>
+        </Attribute>
+        <Attribute>
+            <Name>Notification Show</Name>
+            <Path>onshow</Path>
+            <Method>EVENT</Method>
+        </Attribute>
+        <Attribute>
+            <Name>Notification Close</Name>
+            <Path>onclose</Path>
+            <Method>EVENT</Method>
+        </Attribute>
+        <Attribute>
+            <Name>Notification Error</Name>
+            <Path>onerror</Path>
+            <Method>EVENT</Method>
+        </Attribute>
+    </Profile>
+    <Profile name="phone">
+        <Attribute>
+            <Name>Call</Name>
+            <Path>call</Path>
+            <Method>POST</Method>
+            <Option>
+                <Name>phoneNumber</Name>
+                <Type>text</Type>
+            </Option>
+        </Attribute>
+        <Attribute>
+            <Name>Settings</Name>
+            <Path>set</Path>
+            <Method>PUT</Method>
+            <Option>
+                <Name>mode</Name>
+                <Type>select</Type>
+                <Value>0</Value>
+                <Value>1</Value>
+                <Value>2</Value>
+            </Option>
+        </Attribute>
+        <Attribute>
+            <Name>On Connect</Name>
+            <Path>onconnect</Path>
+            <Method>EVENT</Method>
+        </Attribute>
+    </Profile>
+    <Profile name="settings">
+        <Attribute>
+            <Name>Get Volume</Name>
+            <Path>sound/volume</Path>
+            <Method>GET</Method>
+            <Option>
+                <Name>kind</Name>
+                <Type>select</Type>
+                <Value>1</Value>
+                <Value>2</Value>
+                <Value>3</Value>
+                <Value>4</Value>
+                <Value>5</Value>
+                <Value>6</Value>
+            </Option>
+        </Attribute>
+        <Attribute>
+            <Name>Set Volume</Name>
+            <Path>sound/volume</Path>
+            <Method>PUT</Method>
+            <Option>
+                <Name>kind</Name>
+                <Type>select</Type>
+                <Value>1</Value>
+                <Value>2</Value>
+                <Value>3</Value>
+                <Value>4</Value>
+                <Value>5</Value>
+            </Option>
+            <Option>
+                <Name>level</Name>
+                <Type>text</Type>
+            </Option>
+        </Attribute>
+        <Attribute>
+            <Name>Get Date</Name>
+            <Path>date</Path>
+            <Method>GET</Method>
+        </Attribute>
+        <Attribute>
+            <Name>Set Date</Name>
+            <Path>date</Path>
+            <Method>PUT</Method>
+            <Option>
+                <Name>date</Name>
+                <Type>text</Type>
+            </Option>
+        </Attribute>
+        <Attribute>
+            <Name>Get Display light level</Name>
+            <Path>display/light</Path>
+            <Method>GET</Method>
+        </Attribute>
+        <Attribute>
+            <Name>Set Display light level</Name>
+            <Path>display/light</Path>
+            <Method>PUT</Method>
+            <Option>
+                <Name>level</Name>
+                <Type>text</Type>
+            </Option>
+        </Attribute>
+        <Attribute>
+            <Name>Get Display sleep settings</Name>
+            <Path>display/sleep</Path>
+            <Method>GET</Method>
+        </Attribute>
+        <Attribute>
+            <Name>Set Display sleep settings</Name>
+            <Path>display/sleep</Path>
+            <Method>PUT</Method>
+            <Option>
+                <Name>level</Name>
+                <Type>text</Type>
+            </Option>
+        </Attribute>
+    </Profile>
+    <Profile name="system">
+        <Attribute>
+            <Name>Get System Info</Name>
+            <Path/>
+            <Method>GET</Method>
+        </Attribute>
+        <Attribute>
+            <Name>Get device plugin info</Name>
+            <Path>device</Path>
+            <Method>GET</Method>
+        </Attribute>
+        <Attribute>
+            <Name>Wakeup on</Name>
+            <Path>device/wakeup</Path>
+            <Method>PUT</Method>
+            <Option>
+                <Name>pluginId</Name>
+                <Type>text</Type>
+            </Option>
+        </Attribute>
+        <Attribute>
+            <Name>Unregist all system event</Name>
+            <Path>events</Path>
+            <Method>DELETE</Method>
+            <Option>
+                <Name>sessionKey</Name>
+                <Type>text</Type>
+            </Option>
+        </Attribute>
+        <Attribute>
+            <Name>Show keyword</Name>
+            <Path>keyword</Path>
+            <Method>PUT</Method>
+        </Attribute>
+    </Profile>
+    <Profile name="vibration">
+        <Attribute>
+            <Name>Start</Name>
+            <Path>vibrate</Path>
+            <Method>PUT</Method>
+            <Option>
+                <Name>pattern</Name>
+                <Type>text</Type>
+            </Option>
+        </Attribute>
+        <Attribute>
+            <Name>Stop</Name>
+            <Path>vibrate</Path>
+            <Method>DELETE</Method>
+        </Attribute>
+    </Profile>
+    <Profile name="deviceorientation">
+        <Attribute>
+            <Name>On Device Orientation</Name>
+            <Path>ondeviceorientation</Path>
+            <Method>EVENT</Method>
+        </Attribute>
+    </Profile>
+    <Profile name="proximity">
+        <Attribute>
+            <Name>Proximity Device Event</Name>
+            <Path>ondeviceproximity</Path>
+            <Method>EVENT</Method>
+        </Attribute>
+        <Attribute>
+            <Name>Proximity User Event</Name>
+            <Path>onuserproximity</Path>
+            <Method>EVENT</Method>
+        </Attribute>
+    </Profile>
+</DeviceConnectParam>

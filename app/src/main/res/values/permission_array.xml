@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="permissions">
+        <item>authorization</item>
+        <item>battery</item>
+        <item>connect</item>
+        <item>deviceorientation</item>
+        <item>file_descriptor</item>
+        <item>file</item>
+        <item>media_player</item>
+        <item>mediastream_recording</item>
+        <item>network_service_discovery</item>
+        <item>notification</item>
+        <item>phone</item>
+        <item>proximity</item>
+        <item>settings</item>
+        <item>system</item>
+        <item>vibration</item>
+    </string-array>
+</resources>
