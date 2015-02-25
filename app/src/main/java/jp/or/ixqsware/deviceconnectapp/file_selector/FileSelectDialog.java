@@ -9,13 +9,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -25,9 +23,6 @@ import java.util.List;
 import jp.or.ixqsware.deviceconnectapp.R;
 import static jp.or.ixqsware.deviceconnectapp.Constants.*;
 
-/**
- * Created by hnakadate on 15/02/19.
- */
 public class FileSelectDialog extends DialogFragment
         implements AdapterView.OnItemClickListener, LoaderManager.LoaderCallbacks<List<File>> {
     private FileInfoAdapter adapter;
@@ -53,7 +48,7 @@ public class FileSelectDialog extends DialogFragment
         pathField = getArguments().getString(KEY_PATH_FIELD);
 
         Bundle args = new Bundle();
-        args.putString(KEY_FILE_PATH, File.separator);
+        args.putString(KEY_FILE_PATH, getArguments().getString(KEY_FILE_PATH, File.separator));
         getLoaderManager().restartLoader(1, args, this);
 
         return builder.create();

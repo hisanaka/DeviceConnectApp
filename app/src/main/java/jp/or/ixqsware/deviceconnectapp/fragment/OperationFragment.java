@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.Loader;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Message;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
@@ -39,9 +41,7 @@ import org.deviceconnect.utils.URIBuilder;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -88,6 +88,8 @@ public class OperationFragment extends Fragment implements View.OnClickListener,
 
         operationView = (LinearLayout) rootView.findViewById(R.id.operation_area);
         resultView = (TextView) rootView.findViewById(R.id.result_area);
+        ImageButton shareButton = (ImageButton) rootView.findViewById(R.id.share_button);
+        shareButton.setOnClickListener(this);
 
         mFragment = this;
 
@@ -138,15 +140,31 @@ public class OperationFragment extends Fragment implements View.OnClickListener,
         String pathField = args.getString(KEY_PATH_FIELD);
         String mPath = args.getString(KEY_FILE_PATH);
         View view = findView((ViewGroup) getView(), pathField);
-        if (view == null) {
-            return;
-        } else if (view instanceof EditText) {
-            ((EditText) view).setText(mPath);
+        if (view != null) {
+            if (view instanceof EditText) {
+                ((EditText) view).setText(mPath);
+            }
         }
     }
 
     @Override
     public void onClick(View v) {
+        int id = v.getId();
+        switch (id) {
+            case R.id.share_button:
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.setType("text/plain");
+                sendIntent.putExtra(Intent.EXTRA_TEXT, resultView.getText().toString());
+                startActivity(sendIntent);
+                break;
+
+            default:
+                executeOperation(v);
+        }
+    }
+
+    private void executeOperation(View v) {
         resultView.setText("");
 
         String httpMethod = (String) v.getTag(R.string.method_tag);
@@ -166,7 +184,7 @@ public class OperationFragment extends Fragment implements View.OnClickListener,
                 } else if (view instanceof EditText) {
                     mapOptions.put(optionName, ((EditText) view).getText().toString());
                 } else if (view instanceof LinearLayout) {
-                    // 現在はFileのみ
+                    // 現在はfileが指定された場合のみ
                     String editTag = ((Button) v).getText().toString().replace(" ", "_") + "_edit";
                     EditText pathEdit = (EditText) findView((ViewGroup) view, editTag);
                     String filePath = pathEdit.getText().toString();
@@ -467,7 +485,8 @@ public class OperationFragment extends Fragment implements View.OnClickListener,
                     @Override
                     public void onClick(View v) {
                         Bundle args = new Bundle();
-                        args.putString(KEY_FILE_PATH, "/");
+                        // TODO dConnectHostでは外部領域がデフォルト。外部領域より上位のディレクトリにアクセスする方法を調査する。
+                        args.putString(KEY_FILE_PATH, Environment.getExternalStorageDirectory().toString());
                         args.putString(KEY_PATH_FIELD, parentTag.replace(" ", "_") + "_edit");
 
                         FileSelectDialog dialog = new FileSelectDialog();
@@ -477,7 +496,7 @@ public class OperationFragment extends Fragment implements View.OnClickListener,
                     }
                 });
                 selectButton.setBackgroundResource(R.drawable.ic_action_collection);
-                LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(72, 72);
+                LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(68, 68);
                 buttonParams.setMargins(8, 16, 8, 8);
                 selectButton.setLayoutParams(buttonParams);
 

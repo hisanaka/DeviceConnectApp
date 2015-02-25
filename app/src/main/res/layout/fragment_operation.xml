@@ -19,20 +19,37 @@
 
     </ScrollView>
 
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/border"
         android:layout_weight="2" >
 
-        <TextView
-            android:id="@+id/result_area"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="8dp"
-            android:textIsSelectable="true"
-            android:textSize="18dp"
-            android:text="RESULT HERE"/>
+            android:layout_height="match_parent" >
 
-    </ScrollView>
+            <TextView
+                android:id="@+id/result_area"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:textIsSelectable="true"
+                android:textSize="18dp"
+                android:text="RESULT HERE"/>
+
+        </ScrollView>
+
+        <ImageButton
+            android:id="@+id/share_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/ic_action_share"/>
+
+    </RelativeLayout>
+
 </LinearLayout>
