@@ -44,4 +44,8 @@
     <string name="no_files">No Files.</string>
 
     <string name="add_label">+</string>
+
+    <string name="xml_source">XML Source:</string>
+    <string name="xml_asset">asset</string>
+    <string name="xml_url">Web</string>
 </resources>

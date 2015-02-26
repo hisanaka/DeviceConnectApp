@@ -15,6 +15,8 @@ public class Constants {
     public static final String PREF_KEY_PERMISSIONS = "permissions";
     public static final String PREF_KEY_SERVER_ADDRESS = "server_address";
     public static final String PREF_KEY_SERVER_PORT = "server_port";
+    public static final String PREF_KEY_XML_SOURCE = "xml_source";
+    public static final String PREF_KEY_XML_PATH = "xml_path";
 
     public static final String KEY_SECTION_NUMBER = "section";
     public static final String KEY_SERVER_ADDRESS = "address";

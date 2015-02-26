@@ -61,4 +61,34 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/xml_path_area"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="8dp"
+        android:layout_below="@id/port_area" >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="@string/xml_source"/>
+
+        <Spinner
+            android:id="@+id/path_spin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/path_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:textSize="20dp"
+            android:text="http://" />
+
+    </LinearLayout>
+
 </RelativeLayout>

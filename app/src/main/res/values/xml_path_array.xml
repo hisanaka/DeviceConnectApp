@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="xml_path">
+        <item>@string/xml_asset</item>
+        <item>@string/xml_url</item>
+    </string-array>
+</resources>
