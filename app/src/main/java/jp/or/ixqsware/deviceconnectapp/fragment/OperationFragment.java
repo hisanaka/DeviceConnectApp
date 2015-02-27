@@ -12,12 +12,14 @@ import android.os.Environment;
 import android.os.Message;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
@@ -84,12 +86,10 @@ public class OperationFragment extends Fragment implements View.OnClickListener,
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_operation, container, false);
-        setHasOptionsMenu(false);
+        setHasOptionsMenu(true);
 
         operationView = (LinearLayout) rootView.findViewById(R.id.operation_area);
         resultView = (TextView) rootView.findViewById(R.id.result_area);
-        ImageButton shareButton = (ImageButton) rootView.findViewById(R.id.share_button);
-        shareButton.setOnClickListener(this);
 
         mFragment = this;
 
@@ -132,6 +132,27 @@ public class OperationFragment extends Fragment implements View.OnClickListener,
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_operation, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.share_result:
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.setType("text/plain");
+                sendIntent.putExtra(Intent.EXTRA_TEXT, resultView.getText().toString());
+                startActivity(sendIntent);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != Activity.RESULT_OK) return;
@@ -149,19 +170,7 @@ public class OperationFragment extends Fragment implements View.OnClickListener,
 
     @Override
     public void onClick(View v) {
-        int id = v.getId();
-        switch (id) {
-            case R.id.share_button:
-                Intent sendIntent = new Intent();
-                sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.setType("text/plain");
-                sendIntent.putExtra(Intent.EXTRA_TEXT, resultView.getText().toString());
-                startActivity(sendIntent);
-                break;
-
-            default:
-                executeOperation(v);
-        }
+        executeOperation(v);
     }
 
     private void executeOperation(View v) {
@@ -485,7 +494,7 @@ public class OperationFragment extends Fragment implements View.OnClickListener,
                     @Override
                     public void onClick(View v) {
                         Bundle args = new Bundle();
-                        // TODO dConnectHostでは外部領域がデフォルト。外部領域より上位のディレクトリにアクセスする方法を調査する。
+                        // dConnectHostでは外部領域より上のフォルダにアセスできない(x_x)
                         args.putString(KEY_FILE_PATH, Environment.getExternalStorageDirectory().toString());
                         args.putString(KEY_PATH_FIELD, parentTag.replace(" ", "_") + "_edit");
 

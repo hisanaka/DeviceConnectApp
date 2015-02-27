@@ -39,13 +39,19 @@
 
     <string name="enter_text">Enter new permission name.</string>
     <string name="del_conf">Delete %1$s.\nAre you sure?</string>
-    <string name="server_settings">Enter Server IP address and port number.</string>
+
+    <string name="server_settings">[Device Connect Server Setting]</string>
+    <string name="xml_locate_setting">[Profile XML Location]</string>
+    <string name="save_label">Save</string>
+    <string name="cancel_label">Cancel</string>
 
     <string name="no_files">No Files.</string>
 
     <string name="add_label">+</string>
+    <string name="share_label">Share</string>
 
     <string name="xml_source">XML Source:</string>
     <string name="xml_asset">asset</string>
     <string name="xml_url">Web</string>
+    <string name="xml_site">URL:</string>
 </resources>
