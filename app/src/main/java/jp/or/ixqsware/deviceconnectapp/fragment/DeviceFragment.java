@@ -24,7 +24,8 @@ import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.deviceconnect.message.DConnectMessage;
 import org.deviceconnect.message.http.impl.factory.HttpMessageFactory;
-import org.deviceconnect.profile.NetworkServiceDiscoveryProfileConstants;
+//import org.deviceconnect.profile.NetworkServiceDiscoveryProfileConstants;
+import org.deviceconnect.profile.ServiceDiscoveryProfileConstants;
 import org.deviceconnect.utils.URIBuilder;
 
 import java.io.IOException;
@@ -199,8 +200,11 @@ public class DeviceFragment extends Fragment implements View.OnClickListener,
             DConnectMessage message;
             try {
                 URIBuilder builder = new URIBuilder();
+                /*
                 builder.setProfile(NetworkServiceDiscoveryProfileConstants.PROFILE_NAME);
                 builder.setAttribute(NetworkServiceDiscoveryProfileConstants.ATTRIBUTE_GET_NETWORK_SERVICES);
+                */
+                builder.setProfile(ServiceDiscoveryProfileConstants.PROFILE_NAME);
                 builder.setScheme("http");
                 builder.setHost(ipAddress);
                 builder.setPort(portNumber);
@@ -230,15 +234,22 @@ public class DeviceFragment extends Fragment implements View.OnClickListener,
                         null);
                 return mapDevices;
             }
-
+            /*
             List<Object> services = message.getList(
                     NetworkServiceDiscoveryProfileConstants.PARAM_SERVICES);
+             */
+            List<Object> services = message.getList(
+                    ServiceDiscoveryProfileConstants.PARAM_SERVICES);
             if (services != null) {
                 for (Object object: services) {
                     Map<String, Object> service = (Map<String, Object>) object;
                     SmartDevice device = new SmartDevice(
+                            /*
                             service.get(NetworkServiceDiscoveryProfileConstants.PARAM_ID).toString(),
                             service.get(NetworkServiceDiscoveryProfileConstants.PARAM_NAME).toString());
+                             */
+                            service.get(ServiceDiscoveryProfileConstants.PARAM_ID).toString(),
+                            service.get(ServiceDiscoveryProfileConstants.PARAM_NAME).toString());
                     arrDevices.add(device);
                 }
                 mapDevices.put("Success", arrDevices);

@@ -126,7 +126,8 @@ public class SettingFragment extends DialogFragment
                 String xmlSource = (String) spinXml.getSelectedItem();
                 editor.putString(
                         PREF_KEY_XML_SOURCE,
-                        xmlSource);
+                        xmlSource
+                );
                 if (getString(R.string.xml_url).equals(xmlSource)) {
                     editor.putString(
                             PREF_KEY_XML_PATH,

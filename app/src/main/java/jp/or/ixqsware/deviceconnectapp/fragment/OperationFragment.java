@@ -218,7 +218,8 @@ public class OperationFragment extends Fragment implements View.OnClickListener,
 
         String accessToken = preferences.getString(PREF_KEY_TOKEN, null);
 
-        uriBuilder.addParameter(DConnectMessage.EXTRA_DEVICE_ID, deviceId);
+        //uriBuilder.addParameter(DConnectMessage.EXTRA_DEVICE_ID, deviceId);
+        uriBuilder.addParameter(DConnectMessage.EXTRA_SERVICE_ID, deviceId);
         uriBuilder.addParameter(DConnectMessage.EXTRA_ACCESS_TOKEN, accessToken);
         for (Map.Entry<String, String> stringStringEntry : mapOptions.entrySet()) {
             Map.Entry entry = (Map.Entry) stringStringEntry;

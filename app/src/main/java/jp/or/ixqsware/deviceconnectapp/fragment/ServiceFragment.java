@@ -248,11 +248,12 @@ public class ServiceFragment extends Fragment
 
             URIBuilder uriBuilder = new URIBuilder();
             uriBuilder.setProfile(SystemProfileConstants.PROFILE_NAME);
-            uriBuilder.setAttribute(SystemProfileConstants.ATTRIBUTE_DEVICE);
+            //uriBuilder.setAttribute(SystemProfileConstants.ATTRIBUTE_DEVICE);
             uriBuilder.setScheme("http");
             uriBuilder.setHost(ipAddress);
             uriBuilder.setPort(portNumber);
-            uriBuilder.addParameter(DConnectMessage.EXTRA_DEVICE_ID, deviceId);
+            //uriBuilder.addParameter(DConnectMessage.EXTRA_DEVICE_ID, deviceId);
+            uriBuilder.addParameter(DConnectMessage.EXTRA_SERVICE_ID, deviceId);
             uriBuilder.addParameter(DConnectMessage.EXTRA_ACCESS_TOKEN, null);
 
             try {
