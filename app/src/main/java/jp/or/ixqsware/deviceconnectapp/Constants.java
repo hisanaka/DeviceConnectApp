@@ -1,5 +1,21 @@
 package jp.or.ixqsware.deviceconnectapp;
 
+import org.deviceconnect.profile.AuthorizationProfileConstants;
+import org.deviceconnect.profile.BatteryProfileConstants;
+import org.deviceconnect.profile.ConnectProfileConstants;
+import org.deviceconnect.profile.DeviceOrientationProfileConstants;
+import org.deviceconnect.profile.FileDescriptorProfileConstants;
+import org.deviceconnect.profile.FileProfileConstants;
+import org.deviceconnect.profile.MediaPlayerProfileConstants;
+import org.deviceconnect.profile.MediaStreamRecordingProfileConstants;
+import org.deviceconnect.profile.NotificationProfileConstants;
+import org.deviceconnect.profile.PhoneProfileConstants;
+import org.deviceconnect.profile.ProximityProfileConstants;
+import org.deviceconnect.profile.ServiceDiscoveryProfileConstants;
+import org.deviceconnect.profile.SettingsProfileConstants;
+import org.deviceconnect.profile.SystemProfileConstants;
+import org.deviceconnect.profile.VibrationProfileConstants;
+
 /**
  * Created by hnakadate on 15/01/05.
  */

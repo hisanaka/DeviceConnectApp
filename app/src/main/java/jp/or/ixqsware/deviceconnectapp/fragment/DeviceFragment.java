@@ -26,11 +26,13 @@ import org.deviceconnect.message.DConnectMessage;
 import org.deviceconnect.message.http.impl.factory.HttpMessageFactory;
 //import org.deviceconnect.profile.NetworkServiceDiscoveryProfileConstants;
 import org.deviceconnect.profile.ServiceDiscoveryProfileConstants;
+import org.deviceconnect.utils.AuthProcesser;
 import org.deviceconnect.utils.URIBuilder;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -88,16 +90,21 @@ public class DeviceFragment extends Fragment implements View.OnClickListener,
         String ipAddress = preferences.getString(PREF_KEY_SERVER_ADDRESS, SERVER);
         int portNumber = preferences.getInt(PREF_KEY_SERVER_PORT, PORT);
 
-        if (dialog == null) dialog = new ProgressDialog(getActivity());
-        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        dialog.setMessage(getString(R.string.loading_label));
-        dialog.show();
+        String accessToken = preferences.getString(PREF_KEY_TOKEN, null);
+        if (accessToken == null) {
+                getAccessToken(ipAddress, portNumber);
+        } else {
+            if (dialog == null) dialog = new ProgressDialog(getActivity());
+            dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            dialog.setMessage(getString(R.string.loading_label));
+            dialog.show();
 
-        Bundle args = new Bundle();
-        args.putString(KEY_SERVER_ADDRESS, ipAddress);
-        args.putInt(KEY_SERVER_PORT, portNumber);
+            Bundle args = new Bundle();
+            args.putString(KEY_SERVER_ADDRESS, ipAddress);
+            args.putInt(KEY_SERVER_PORT, portNumber);
 
-        getLoaderManager().restartLoader(0, args, this);
+            getLoaderManager().restartLoader(0, args, this);
+        }
     }
 
     @Override
@@ -133,6 +140,44 @@ public class DeviceFragment extends Fragment implements View.OnClickListener,
     public void onLoaderReset(Loader<HashMap<String, ArrayList<SmartDevice>>> loader) {
 
     }
+
+    private void getAccessToken(String ipAddress, int portNumber) {
+        String appName = getResources().getString(R.string.app_name);
+        String prefPermissions = preferences.getString(PREF_KEY_PERMISSIONS, "");
+        String[] lstPermissions;
+        if (prefPermissions.length() == 0) {
+            lstPermissions = getResources().getStringArray(R.array.permissions);
+        } else {
+            lstPermissions = prefPermissions.split(";");
+        }
+        AuthProcesser.asyncAuthorize(
+                ipAddress,
+                portNumber,
+                false,
+                getActivity().getPackageName(),
+                appName,
+                lstPermissions,
+                authHandler
+        );
+    }
+
+    private AuthProcesser.AuthorizationHandler authHandler
+            = new AuthProcesser.AuthorizationHandler() {
+        @Override
+        public void onAuthorized(String clientId, String clientSecret, String accessToken_) {
+            Calendar calendar = Calendar.getInstance();
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString(PREF_KEY_TOKEN, accessToken_);
+            editor.putLong(PREF_KEY_TOKEN_GET, calendar.getTimeInMillis());
+            editor.putString(PREF_KEY_CLIENT_ID, clientId);
+            editor.putString(PREF_KEY_CLIENT_SECRET, clientSecret);
+            editor.apply();
+        }
+
+        @Override
+        public void onAuthFailed(DConnectMessage.ErrorCode error) {
+        }
+    };
 
     /**
      *
@@ -185,11 +230,15 @@ public class DeviceFragment extends Fragment implements View.OnClickListener,
             extends AsyncTaskLoader<HashMap<String, ArrayList<SmartDevice>>> {
         private String ipAddress;
         private int portNumber;
+        private String accessToken;
 
         public DeviceDiscoverAsyncTaskLoader(Context context, Bundle args) {
             super(context);
             ipAddress = args.getString(KEY_SERVER_ADDRESS);
             portNumber = args.getInt(KEY_SERVER_PORT);
+            SharedPreferences sharedPreferences
+                    = PreferenceManager.getDefaultSharedPreferences(context);
+            accessToken = sharedPreferences.getString(PREF_KEY_TOKEN, null);
         }
 
         @Override
@@ -208,7 +257,7 @@ public class DeviceFragment extends Fragment implements View.OnClickListener,
                 builder.setScheme("http");
                 builder.setHost(ipAddress);
                 builder.setPort(portNumber);
-                builder.addParameter(DConnectMessage.EXTRA_ACCESS_TOKEN, null);
+                builder.addParameter(DConnectMessage.EXTRA_ACCESS_TOKEN, accessToken);
 
                 HttpUriRequest request = new HttpGet(builder.build());
                 DefaultHttpClient mClient = new DefaultHttpClient();

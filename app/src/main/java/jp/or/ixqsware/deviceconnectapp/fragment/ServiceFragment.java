@@ -10,6 +10,7 @@ import android.content.Loader;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.deviceconnect.message.DConnectMessage;
 import org.deviceconnect.message.http.impl.factory.HttpMessageFactory;
+import org.deviceconnect.profile.ServiceInformationProfileConstants;
 import org.deviceconnect.profile.SystemProfileConstants;
 import org.deviceconnect.utils.AuthProcesser;
 import org.deviceconnect.utils.URIBuilder;
@@ -232,6 +234,7 @@ public class ServiceFragment extends Fragment
         private String deviceId;
         private String ipAddress;
         private int portNumber;
+        private String accessToken;
 
         public ServiceDiscoverAsyncTaskLoader(Context context, Bundle args) {
             super(context);
@@ -239,6 +242,10 @@ public class ServiceFragment extends Fragment
             this.ipAddress = args.getString(KEY_SERVER_ADDRESS);
             this.portNumber = args.getInt(KEY_SERVER_PORT);
             this.deviceId = args.getString(KEY_DEVICE_ID);
+
+            SharedPreferences sharedPreferences
+                    = PreferenceManager.getDefaultSharedPreferences(context);
+            accessToken = sharedPreferences.getString(PREF_KEY_TOKEN, null);
         }
 
         @Override
@@ -247,14 +254,21 @@ public class ServiceFragment extends Fragment
             DConnectMessage message;
 
             URIBuilder uriBuilder = new URIBuilder();
-            uriBuilder.setProfile(SystemProfileConstants.PROFILE_NAME);
-            //uriBuilder.setAttribute(SystemProfileConstants.ATTRIBUTE_DEVICE);
+            uriBuilder.setProfile(ServiceInformationProfileConstants.PROFILE_NAME);
             uriBuilder.setScheme("http");
             uriBuilder.setHost(ipAddress);
             uriBuilder.setPort(portNumber);
-            //uriBuilder.addParameter(DConnectMessage.EXTRA_DEVICE_ID, deviceId);
             uriBuilder.addParameter(DConnectMessage.EXTRA_SERVICE_ID, deviceId);
+            uriBuilder.addParameter(DConnectMessage.EXTRA_ACCESS_TOKEN, accessToken);
+            /* 旧バージョン
+            uriBuilder.setProfile(SystemProfileConstants.PROFILE_NAME);
+            uriBuilder.setAttribute(SystemProfileConstants.ATTRIBUTE_DEVICE);
+            uriBuilder.setScheme("http");
+            uriBuilder.setHost(ipAddress);
+            uriBuilder.setPort(portNumber);
+            uriBuilder.addParameter(DConnectMessage.EXTRA_DEVICE_ID, deviceId);
             uriBuilder.addParameter(DConnectMessage.EXTRA_ACCESS_TOKEN, null);
+            */
 
             try {
                 HttpUriRequest request = new HttpGet(uriBuilder.build());
