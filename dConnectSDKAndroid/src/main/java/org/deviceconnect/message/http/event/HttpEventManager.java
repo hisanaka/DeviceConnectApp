@@ -6,8 +6,6 @@
  */
 package org.deviceconnect.message.http.event;
 
-import android.util.Log;
-
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -252,7 +250,7 @@ public final class HttpEventManager extends AbstractEventManager {
 
         @Override
         public void onMessage(final String message) {
-            Log.d("DEBUG:", "onMessage: " + message);
+
             try {
                 sendEvent(new JSONObject(message));
             } catch (JSONException e) {

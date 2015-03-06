@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 19
-    buildToolsVersion "19.1.0"
+    buildToolsVersion "21.0.0"
 
     defaultConfig {
         minSdkVersion 14
@@ -18,7 +18,7 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:19.+'
+    compile 'com.android.support:support-v4:19.1.0'
     compile files('libs/apache-mime4j-0.6.jar')
     compile files('libs/java_websocket.jar')
 }
