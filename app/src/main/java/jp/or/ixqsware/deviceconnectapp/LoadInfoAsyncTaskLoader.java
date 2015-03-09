@@ -96,8 +96,10 @@ public class LoadInfoAsyncTaskLoader
                     child.setMethod("");
                     child.setInterface("");
 
-                    NodeList valueNodes = (NodeList) xPath.evaluate("./Value",
-                            optionNode, XPathConstants.NODESET);
+                    NodeList valueNodes = (NodeList) xPath.evaluate(
+                            "./Value",
+                            optionNode,
+                            XPathConstants.NODESET);
                     for (int k = 0; k < valueNodes.getLength(); k++) {
                         Node valueNode = valueNodes.item(k);
                         child.addValue(xPath.evaluate("./text()", valueNode));
@@ -118,6 +120,7 @@ public class LoadInfoAsyncTaskLoader
     private Document loadFromAsset(String deviceName)
             throws IOException, ParserConfigurationException, SAXException {
         AssetManager manager = getContext().getAssets();
+        /* XMLファイル名はデバイスプラグイン名.xml (スペースはアンダースコアに変換) */
         InputStream is = manager.open(deviceName.replace(" ", "_") + ".xml");
 
         DocumentBuilderFactory dFactory = DocumentBuilderFactory.newInstance();
@@ -131,6 +134,7 @@ public class LoadInfoAsyncTaskLoader
         String xmlPath = preferences.getString(PREF_KEY_XML_PATH, null);
         if (xmlPath == null) { return loadFromAsset(deviceName); }
 
+        /* XMLファイル名はデバイスプラグイン名.xml (スペースはアンダースコアに変換) */
         URL url = new URL(xmlPath + "/" + deviceName.replace(" ", "_") + ".xml");
         URLConnection connection = url.openConnection();
 

@@ -135,6 +135,7 @@ public class ServiceFragment extends Fragment
         } else {
             Calendar calendar = Calendar.getInstance();
             long elapseTimeInMillis = calendar.getTimeInMillis() - getTime;
+            /* AccessTokenの有効期限はとりあえず60日で */
             long elapseDate = elapseTimeInMillis / (24 * 60 * 60 * 1000);
             if (elapseDate > 60) {
                 getAccessToken();
@@ -254,21 +255,12 @@ public class ServiceFragment extends Fragment
             DConnectMessage message;
 
             URIBuilder uriBuilder = new URIBuilder();
-            uriBuilder.setProfile(ServiceInformationProfileConstants.PROFILE_NAME);
             uriBuilder.setScheme("http");
             uriBuilder.setHost(ipAddress);
             uriBuilder.setPort(portNumber);
+            uriBuilder.setProfile(ServiceInformationProfileConstants.PROFILE_NAME);
             uriBuilder.addParameter(DConnectMessage.EXTRA_SERVICE_ID, deviceId);
             uriBuilder.addParameter(DConnectMessage.EXTRA_ACCESS_TOKEN, accessToken);
-            /* 旧バージョン
-            uriBuilder.setProfile(SystemProfileConstants.PROFILE_NAME);
-            uriBuilder.setAttribute(SystemProfileConstants.ATTRIBUTE_DEVICE);
-            uriBuilder.setScheme("http");
-            uriBuilder.setHost(ipAddress);
-            uriBuilder.setPort(portNumber);
-            uriBuilder.addParameter(DConnectMessage.EXTRA_DEVICE_ID, deviceId);
-            uriBuilder.addParameter(DConnectMessage.EXTRA_ACCESS_TOKEN, null);
-            */
 
             try {
                 HttpUriRequest request = new HttpGet(uriBuilder.build());

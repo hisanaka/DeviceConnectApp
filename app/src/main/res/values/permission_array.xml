@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- dConnectHostに準拠 -->
     <string-array name="permissions">
         <item>authorization</item>
         <item>battery</item>
@@ -9,9 +10,6 @@
         <item>file</item>
         <item>media_player</item>
         <item>mediastream_recording</item>
-        <!-- 旧バージョン
-        <item>network_service_discovery</item>
-        -->
         <item>servicediscovery</item>
         <item>notification</item>
         <item>phone</item>
@@ -19,9 +17,7 @@
         <item>settings</item>
         <item>system</item>
         <item>vibration</item>
-        <!-- dConnectHostほ利用する場合は下記を追加(PermissionFragmentでも可)
         <item>serviceinformation</item>
         <item>canvas</item>
-        -->
     </string-array>
 </resources>

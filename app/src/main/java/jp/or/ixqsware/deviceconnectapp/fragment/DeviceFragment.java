@@ -249,10 +249,6 @@ public class DeviceFragment extends Fragment implements View.OnClickListener,
             DConnectMessage message;
             try {
                 URIBuilder builder = new URIBuilder();
-                /*
-                builder.setProfile(NetworkServiceDiscoveryProfileConstants.PROFILE_NAME);
-                builder.setAttribute(NetworkServiceDiscoveryProfileConstants.ATTRIBUTE_GET_NETWORK_SERVICES);
-                */
                 builder.setProfile(ServiceDiscoveryProfileConstants.PROFILE_NAME);
                 builder.setScheme("http");
                 builder.setHost(ipAddress);
@@ -283,20 +279,12 @@ public class DeviceFragment extends Fragment implements View.OnClickListener,
                         null);
                 return mapDevices;
             }
-            /*
-            List<Object> services = message.getList(
-                    NetworkServiceDiscoveryProfileConstants.PARAM_SERVICES);
-             */
             List<Object> services = message.getList(
                     ServiceDiscoveryProfileConstants.PARAM_SERVICES);
             if (services != null) {
                 for (Object object: services) {
                     Map<String, Object> service = (Map<String, Object>) object;
                     SmartDevice device = new SmartDevice(
-                            /*
-                            service.get(NetworkServiceDiscoveryProfileConstants.PARAM_ID).toString(),
-                            service.get(NetworkServiceDiscoveryProfileConstants.PARAM_NAME).toString());
-                             */
                             service.get(ServiceDiscoveryProfileConstants.PARAM_ID).toString(),
                             service.get(ServiceDiscoveryProfileConstants.PARAM_NAME).toString());
                     arrDevices.add(device);
