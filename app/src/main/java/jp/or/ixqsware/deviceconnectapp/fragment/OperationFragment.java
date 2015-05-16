@@ -58,6 +58,7 @@ import static jp.or.ixqsware.deviceconnectapp.Constants.*;
 public class OperationFragment extends Fragment implements View.OnClickListener,
         LoaderManager.LoaderCallbacks<HashMap<Integer, ArrayList<ControlObject>>> {
     private TextView resultView;
+    private ScrollView resultScroll;
     private LinearLayout operationView;
     private String ipAddress;
     private int portNumber;
@@ -66,11 +67,7 @@ public class OperationFragment extends Fragment implements View.OnClickListener,
     private SharedPreferences preferences;
     private ProgressDialog progressDialog = null;
     private Fragment mFragment;
-    private Handler mHandler = new Handler() {
-        public void handleMessage(Message message) {
-            resultView.setText((String) message.obj);
-        }
-    };
+    private Handler mHandler;
 
     public static OperationFragment newInstance(int sectionNumber) {
         OperationFragment fragment = new OperationFragment();
@@ -80,7 +77,23 @@ public class OperationFragment extends Fragment implements View.OnClickListener,
         return fragment;
     }
 
-    public OperationFragment() {}
+    public OperationFragment() {
+        mHandler = new Handler() {
+            public void handleMessage(Message message) {
+                //resultView.setText((String) message.obj);
+                resultView.append((String) message.obj);
+                resultView.append(System.getProperty("line.separator"));
+                resultView.append("-- ");
+                resultView.append(System.getProperty("line.separator"));
+                resultScroll.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        resultScroll.scrollTo(0, resultScroll.getBottom());
+                    }
+                });
+            }
+        };
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -90,6 +103,7 @@ public class OperationFragment extends Fragment implements View.OnClickListener,
 
         operationView = (LinearLayout) rootView.findViewById(R.id.operation_area);
         resultView = (TextView) rootView.findViewById(R.id.result_area);
+        resultScroll = (ScrollView) rootView.findViewById(R.id.result_scroll);
 
         mFragment = this;
 
